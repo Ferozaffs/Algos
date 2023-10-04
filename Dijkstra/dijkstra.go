@@ -1,4 +1,4 @@
-package djikstra
+package dijkstra
 
 type edge struct {
 	Vertex *vertex

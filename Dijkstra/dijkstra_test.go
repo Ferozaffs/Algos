@@ -1,11 +1,11 @@
-package djikstra
+package dijkstra
 
 import (
 	"slices"
 	"testing"
 )
 
-func TestDjikstraSimple(t *testing.T) {
+func TestDijkstraSimple(t *testing.T) {
 	vertices := make([]vertex, 4)
 
 	addEdge(&vertices[0], &vertices[1], 1.5)
@@ -26,7 +26,7 @@ func TestDjikstraSimple(t *testing.T) {
 	}
 }
 
-func TestDjikstraComplex(t *testing.T) {
+func TestDijkstraComplex(t *testing.T) {
 	vertices := make([]vertex, 10)
 
 	addEdge(&vertices[0], &vertices[1], 1.5)
