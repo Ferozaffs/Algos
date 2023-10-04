@@ -1,24 +1,24 @@
 package dijkstra
 
-type edge struct {
-	Vertex *vertex
-	Weight float64
+type Edge struct {
+	vertex *Vertex
+	weight float64
 }
 
-type vertex struct {
-	Edges []edge
+type Vertex struct {
+	edges []Edge
 }
 
-func addEdge(Src *vertex, Dest *vertex, Weight float64) {
-	Src.Edges = append(Src.Edges, edge{Vertex: Dest, Weight: Weight})
+func AddEdge(src *Vertex, dest *Vertex, weight float64) {
+	src.edges = append(src.edges, Edge{vertex: dest, weight: weight})
 }
 
-func pathfind(Vertex []vertex, Src *vertex, Dest *vertex) []*vertex {
-	queue := []*vertex{}
-	queue = append(queue, Src)
+func pathfind(vertex []Vertex, src *Vertex, dest *Vertex) []*Vertex {
+	queue := []*Vertex{}
+	queue = append(queue, src)
 
-	dist := make(map[*vertex]edge)
-	dist[Src] = edge{nil, 0.0}
+	dist := make(map[*Vertex]Edge)
+	dist[src] = Edge{nil, 0.0}
 
 	for {
 		if len(queue) == 0 {
@@ -28,29 +28,29 @@ func pathfind(Vertex []vertex, Src *vertex, Dest *vertex) []*vertex {
 		u := queue[0]
 		queue = queue[1:]
 
-		for _, e := range u.Edges {
-			v, exists := dist[e.Vertex]
+		for _, e := range u.edges {
+			v, exists := dist[e.vertex]
 			if exists != true {
-				dist[e.Vertex] = edge{u, dist[u].Weight + e.Weight}
-				queue = append(queue, e.Vertex)
+				dist[e.vertex] = Edge{u, dist[u].weight + e.weight}
+				queue = append(queue, e.vertex)
 			} else {
-				if v.Weight > dist[u].Weight+e.Weight {
-					dist[e.Vertex] = edge{u, dist[u].Weight + e.Weight}
-					queue = append(queue, e.Vertex)
+				if v.weight > dist[u].weight+e.weight {
+					dist[e.vertex] = Edge{u, dist[u].weight + e.weight}
+					queue = append(queue, e.vertex)
 				}
 			}
 		}
 	}
 
-	path := []*vertex{}
-	path = append(path, Dest)
-	v := Dest
+	path := []*Vertex{}
+	path = append(path, dest)
+	v := dest
 	for {
 		_, exists := dist[v]
-		if dist[v].Vertex == nil || exists != true {
+		if dist[v].vertex == nil || exists != true {
 			break
 		}
-		v = dist[v].Vertex
+		v = dist[v].vertex
 		path = append(path, v)
 	}
 
