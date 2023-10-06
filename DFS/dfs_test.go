@@ -1,4 +1,4 @@
-package recurMaze
+package DFS
 
 import (
 	"testing"
@@ -11,7 +11,7 @@ func TestMazeSimple(t *testing.T) {
 		{6, 1, 1, 1},
 	}
 
-	path := SolveMaze(maze)
+	path := Solve(maze)
 
 	solution := [6]Coordinate{
 		{x: 2, y: 0},
@@ -41,7 +41,7 @@ func TestMazeComplex(t *testing.T) {
 		{0, 0, 0, 0, 0, 0, 0, 0},
 	}
 
-	path := SolveMaze(maze)
+	path := Solve(maze)
 
 	solution := []Coordinate{
 		{x: 4, y: 3},
